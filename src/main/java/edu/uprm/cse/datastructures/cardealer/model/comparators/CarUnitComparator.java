@@ -11,8 +11,11 @@ public class CarUnitComparator implements Comparator<CarUnit>{
 		CarUnit cU1 = arg0;
 		CarUnit cU2 = arg1;
 		
+		Integer cU1VIN = Integer.parseInt(cU1.getVIN());
+		Integer cU2VIN = Integer.parseInt(cU2.getVIN());
+
 		//compare each category
-		return cU1.getVIN().compareTo(cU2.getVIN());//compare VIN numbers
+		return cU1VIN.compareTo(cU2VIN);//compare VIN numbers
 	}
 
 }
