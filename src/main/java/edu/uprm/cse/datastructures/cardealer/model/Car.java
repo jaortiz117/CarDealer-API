@@ -6,6 +6,7 @@ public class Car {
 	private String carModel;
 	private String carModelOption;
 	private double carPrice;
+	private long carYear;
 	public long getCarId() {
 		return carId;
 	}
@@ -21,17 +22,21 @@ public class Car {
 	public double getCarPrice() {
 		return carPrice;
 	}
+	public long getCarYear() {
+		return carYear;
+	}
 	
 	public Car() {
 		
 	}
-	public Car(long carId, String carBrand, String carModel, String carModelOption, double carPrice) {
+	public Car(long carId, String carBrand, String carModel, String carModelOption, double carPrice, long carYear) {
 		super();
 		this.carId = carId;
 		this.carBrand = carBrand;
 		this.carModel = carModel;
 		this.carModelOption = carModelOption;
 		this.carPrice = carPrice;
+		this.carYear = carYear;
 	}
 	@Override
 	public int hashCode() {
@@ -41,6 +46,7 @@ public class Car {
 		result = prime * result + (int) (carId ^ (carId >>> 32));
 		result = prime * result + ((carModel == null) ? 0 : carModel.hashCode());
 		result = prime * result + ((carModelOption == null) ? 0 : carModelOption.hashCode());
+		result = prime * result + (int) (carYear ^ (carYear >>> 32));
 		long temp;
 		temp = Double.doubleToLongBits(carPrice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -62,6 +68,8 @@ public class Car {
 			return false;
 		if (carId != other.carId)
 			return false;
+		if (carYear != other.carYear)
+			return false;
 		if (carModel == null) {
 			if (other.carModel != null)
 				return false;
@@ -79,7 +87,7 @@ public class Car {
 	@Override
 	public String toString() {
 		return "Car [carId=" + carId + ", carBrand=" + carBrand + ", carModel=" + carModel + ", carModelOption="
-				+ carModelOption + ", carPrice=" + carPrice + "]";
+				+ carModelOption + ", carPrice=" + carPrice + ", carYear=" + carYear + "]";
 	}
 	
 }
