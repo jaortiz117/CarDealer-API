@@ -1,6 +1,8 @@
-package edu.uprm.cse.datastructures.cardealer.model;
+package edu.uprm.cse.datastructures.cardealer.model.comparators;
 
 import java.util.Comparator;
+
+import edu.uprm.cse.datastructures.cardealer.model.Car;
 
 public class CarComparator implements Comparator<Car>{
 	@Override

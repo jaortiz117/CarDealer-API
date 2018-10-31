@@ -1,5 +1,7 @@
-package edu.uprm.cse.datastructures.cardealer.model;
+package edu.uprm.cse.datastructures.cardealer.model.staticLists;
 
+import edu.uprm.cse.datastructures.cardealer.model.Car;
+import edu.uprm.cse.datastructures.cardealer.model.comparators.CarComparator;
 import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList;
 import edu.uprm.cse.datastructures.cardealer.util.SortedList;
 
