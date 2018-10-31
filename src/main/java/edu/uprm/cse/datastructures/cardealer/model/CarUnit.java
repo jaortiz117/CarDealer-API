@@ -60,10 +60,10 @@ public class CarUnit {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (carId ^ (carId >>> 32));
-//		result = prime * result + ((carPlate == null) ? 0 : carPlate.hashCode());
+		result = prime * result + ((carPlate == null) ? 0 : carPlate.hashCode());
 		result = prime * result + (int) (carUnitId ^ (carUnitId >>> 32));
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-//		result = prime * result + (int) (personId ^ (personId >>> 32));
+		result = prime * result + (int) (personId ^ (personId >>> 32));
 		result = prime * result + ((vin == null) ? 0 : vin.hashCode());
 		return result;
 	}
