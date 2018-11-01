@@ -14,7 +14,7 @@ public interface PositionalList<E> extends Iterable<E> {
 	/** Returns the position immediately after position p, or null if p is the first position in the list. **/
 	Position<E> after(Position<E> p) throws IllegalArgumentException; 
 	/** Inserts element e at the front of the list and returns its new position. **/
-	Position<E> addFirst(E e); 
+//	Position<E> addFirst(E e); 
 	/** Inserts element e at the end (or back) of the list and returns its new position. **/
 	Position<E> addLast(E e); 
 	/** Inserts element e immediately before position p and returns its new position. **/
