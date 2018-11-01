@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import edu.uprm.cse.datastructures.cardealer.model.Car;
 import edu.uprm.cse.datastructures.cardealer.model.staticLists.CarList;
 import edu.uprm.cse.datastructures.cardealer.util.NotFoundException;
-import edu.uprm.cse.datastructures.cardealer.util.SortedList;
+import edu.uprm.cse.datastructures.cardealer.util.interfaces.SortedList;
 
 @Path("cars")
 public class CarManager {

@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import edu.uprm.cse.datastructures.cardealer.util.SortedList;
+import edu.uprm.cse.datastructures.cardealer.util.interfaces.SortedList;
 
 public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 	// valid position in the list
