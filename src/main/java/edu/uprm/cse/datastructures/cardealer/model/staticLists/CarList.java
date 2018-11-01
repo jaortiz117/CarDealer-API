@@ -3,7 +3,7 @@ package edu.uprm.cse.datastructures.cardealer.model.staticLists;
 import edu.uprm.cse.datastructures.cardealer.model.Car;
 import edu.uprm.cse.datastructures.cardealer.model.comparators.CarComparator;
 import edu.uprm.cse.datastructures.cardealer.util.CircularSortedDoublyLinkedList;
-import edu.uprm.cse.datastructures.cardealer.util.SortedList;
+import edu.uprm.cse.datastructures.cardealer.util.interfaces.SortedList;
 
 public class CarList {
 	private final static SortedList<Car> carList = new CircularSortedDoublyLinkedList<>(new CarComparator()); 
