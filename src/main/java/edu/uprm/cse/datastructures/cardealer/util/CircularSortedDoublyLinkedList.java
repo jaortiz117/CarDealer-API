@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import edu.uprm.cse.datastructures.cardealer.util.interfaces.Node;
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.SortedList;
 
 public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
@@ -205,7 +206,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 		this.comp = comp;
 	}
 	
-	private class DNode<T>{
+	private class DNode<T> implements Node<T>{
 		private DNode<T> prev;
 		private DNode<T> next;
 		private T e;
