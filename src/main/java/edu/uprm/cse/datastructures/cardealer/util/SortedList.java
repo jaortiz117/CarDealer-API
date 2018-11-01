@@ -1,4 +1,4 @@
-package edu.uprm.cse.datastructures.cardealer.util.interfaces;
+package edu.uprm.cse.datastructures.cardealer.util;
 
 public interface SortedList<E> extends Iterable<E>{
 
