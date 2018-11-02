@@ -3,11 +3,12 @@ package edu.uprm.cse.datastructures.cardealer.util;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import edu.uprm.cse.datastructures.cardealer.util.interfaces.Node;
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.Position;
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.PositionalList;
 
 public class LinkedPositionalList<E> implements PositionalList<E>{
-	private static class DNode<E> implements Position<E> { 
+	private static class DNode<E> implements Position<E>, Node<E> { 
 		private E element; 
 		private DNode<E> prev, next;
 		public E getElement() {
@@ -24,9 +25,9 @@ public class LinkedPositionalList<E> implements PositionalList<E>{
 		public DNode() {
 			this(null, null, null);
 		}
-		public void setElement(E element) {
-			this.element = element;
-		}
+//		public void setElement(E e) {
+//			this.element = e;
+//		}
 		public DNode<E> getPrev() {
 			return prev;
 		}
@@ -42,6 +43,11 @@ public class LinkedPositionalList<E> implements PositionalList<E>{
 		public void clean() { 
 			element = null; 
 			prev = next = null; 
+		}
+		@Override
+		public void setElement(E e) {
+			this.element = e;
+			
 		}
 	}
 
