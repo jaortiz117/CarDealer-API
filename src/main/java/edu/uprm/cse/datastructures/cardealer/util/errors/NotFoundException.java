@@ -1,4 +1,4 @@
-package edu.uprm.cse.datastructures.cardealer.util;
+package edu.uprm.cse.datastructures.cardealer.util.errors;
 /* Copyright © 2015 Oracle and/or its affiliates. All rights reserved. */
 
 import javax.ws.rs.WebApplicationException;
