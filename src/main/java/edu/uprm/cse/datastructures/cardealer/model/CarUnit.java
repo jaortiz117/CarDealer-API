@@ -35,6 +35,10 @@ public class CarUnit {
 	private void setPersonId(long personId) {
 		this.personId = personId;
 	}
+	
+	public CarUnit() {
+
+	}
 
 	public CarUnit(long carUnitId, long carId, String vin, String color, String carPlate, long personId) {
 		super();

@@ -22,6 +22,10 @@ public class Appointment {
 		this.bill = bill;
 	}
 	
+	public Appointment() {
+
+	}
+	
 	public Appointment(long appointmentId, long carUnitId, String job, double bill) {
 		super();
 		this.appointmentId = appointmentId;
