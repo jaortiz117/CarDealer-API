@@ -1,17 +1,17 @@
 package edu.uprm.cse.datastructures.cardealer.model;
 
 public class Person {
-	
+
 	public static final Character MALE = 'M';
 	public static final Character FEMALE = 'F';
-	
+
 	private long personId; // internal id of the person
 	private String firstName; // first name
 	private String lastName; // lastname
 	private Integer age; // age
 	private Character gender; // gender
 	private String phone; // phone number
-	
+
 	public long getPersonId() {
 		return personId;
 	}
@@ -30,8 +30,13 @@ public class Person {
 	public String getPhone() {
 		return phone;
 	}
-	
-	public Person(long personId, String firstName, String lastName, Integer age, Character gender, String phone) {
+
+	public Person() {
+
+	}
+
+	public Person(long personId, String firstName, String lastName, 
+			Integer age, Character gender, String phone) {
 		super();
 		this.personId = personId;
 		this.firstName = firstName;
@@ -95,6 +100,6 @@ public class Person {
 		return "Person [personId=" + personId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
 				+ ", gender=" + gender + ", phone=" + phone + "]";
 	}
-	
-	
+
+
 }
