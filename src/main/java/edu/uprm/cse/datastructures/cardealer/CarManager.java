@@ -63,7 +63,7 @@ public class CarManager {
 	@PUT
     @Path("/{id}/update")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateCustomer(@PathParam("id") long id, Car car){
+	public Response updateCar(@PathParam("id") long id, Car car){
 		if(car.getCarId() != id)
 			return Response.status(Response.Status.NOT_ACCEPTABLE).build();
 
@@ -80,7 +80,7 @@ public class CarManager {
 
 	@DELETE
     @Path("/{id}/delete")
-    public Response deleteCustomer(@PathParam("id") long id){
+    public Response deleteCar(@PathParam("id") long id){
 		for(Car car: carList) {
 			if(car.getCarId() == id) {
 				if(carList.remove(car))
