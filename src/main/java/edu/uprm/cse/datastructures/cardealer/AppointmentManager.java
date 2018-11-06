@@ -104,12 +104,14 @@ public class AppointmentManager {
 	public Response deleteAppointment(@PathParam("id") long id){
 		for(int i=0; i<DAYS; i++) {
 			for(Position<Appointment> pos : appointmentList[i].positions()) {
-				try {
-					appointmentList[i].remove(pos);
-				} catch (Exception e) {
-					return Response.status(Response.Status.NOT_FOUND).build();
+				if(pos.getElement().getAppointmentId() == id) {
+					try {
+						appointmentList[i].remove(pos);
+					} catch (Exception e) {
+						return Response.status(Response.Status.NOT_FOUND).build();
+					}
+					return Response.status(Response.Status.OK).build();
 				}
-				return Response.status(Response.Status.OK).build();
 			}
 		}
 		return Response.status(Response.Status.NOT_FOUND).build();
