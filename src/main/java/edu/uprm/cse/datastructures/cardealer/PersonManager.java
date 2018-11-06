@@ -45,7 +45,6 @@ public class PersonManager {
 				return person;
 		}
 
-		//		throw new NotFoundException(new JsonError("Error", "Person " + id + " not found"));
 		throw new NotFoundException();
 	}
 

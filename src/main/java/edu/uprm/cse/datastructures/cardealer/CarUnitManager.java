@@ -44,7 +44,6 @@ public class CarUnitManager {
 				return carUnit;
 		}
 
-		//		throw new NotFoundException(new JsonError("Error", "carUnit " + id + " not found"));
 		throw new NotFoundException();
 	}
 
