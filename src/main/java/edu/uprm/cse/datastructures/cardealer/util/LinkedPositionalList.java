@@ -139,7 +139,10 @@ public class LinkedPositionalList<E> implements PositionalList<E>{
 	//	}
 
 	@Override
-	public Position<E> addLast(E e) {
+	public Position<E> addLast(E e) throws IllegalArgumentException{
+		if(this.contains(e)) {
+			throw new IllegalArgumentException("list already contains that element");
+		}
 		return addBetween(trailer.getPrev(), trailer, e);
 	}
 
@@ -188,7 +191,14 @@ public class LinkedPositionalList<E> implements PositionalList<E>{
 		return new ElementIterator();
 	}
 
-
+	private boolean contains(E e) {
+		for(E item : this) {
+			if(e.equals(item))
+				return true;
+		}
+		
+		return false;
+	}
 	// Implementation of Iterator and Iterable...
 	private class PositionIterator implements Iterator<Position<E>> {
 		private DNode<E> cursor = header.getNext(), 
