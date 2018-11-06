@@ -63,7 +63,7 @@ public class PersonManager {
 	@PUT
 	@Path("/{id}/update")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateCustomer(@PathParam("id") long id, Person person){
+	public Response updatePerson(@PathParam("id") long id, Person person){
 		if(person.getPersonId() != id)
 			return Response.status(Response.Status.NOT_ACCEPTABLE).build();
 
@@ -80,7 +80,7 @@ public class PersonManager {
 
 	@DELETE
 	@Path("/{id}/delete")
-	public Response deleteCustomer(@PathParam("id") long id){
+	public Response deletePerson(@PathParam("id") long id){
 		for(Person Person: personList) {
 			if(Person.getPersonId() == id) {
 				if(personList.remove(Person))
