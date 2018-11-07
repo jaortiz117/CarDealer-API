@@ -4,6 +4,9 @@ import java.util.Comparator;
 
 import edu.uprm.cse.datastructures.cardealer.model.Car;
 
+/*
+ * Car comparator sorts compraes by brand, then by model, and then by option
+ */
 public class CarComparator implements Comparator<Car>{
 	@Override
 	public int compare(Car arg0, Car arg1) {
