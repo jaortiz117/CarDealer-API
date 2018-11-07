@@ -87,7 +87,7 @@ public class AppointmentManager {
 						Position<Appointment> newPos = appointmentList[i].addAfter(pos, appointment);
 						//removes previous position
 						appointmentList[i].remove(appointmentList[i].before(newPos));
-					} catch (Exception e) {
+					} catch (Exception e) {//if any of the operations are not possible a 404 is thrown
 						return Response.status(Response.Status.NOT_FOUND).build();
 					}
 
@@ -105,6 +105,9 @@ public class AppointmentManager {
 		for(int i=0; i<DAYS; i++) {
 			for(Position<Appointment> pos : appointmentList[i].positions()) {
 				if(pos.getElement().getAppointmentId() == id) {
+					
+					//if remove operation fails its because position is not in the list
+					//throws 404
 					try {
 						appointmentList[i].remove(pos);
 					} catch (Exception e) {
