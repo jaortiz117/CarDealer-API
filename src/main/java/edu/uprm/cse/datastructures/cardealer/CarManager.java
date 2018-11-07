@@ -1,6 +1,8 @@
 package edu.uprm.cse.datastructures.cardealer;
 
 
+import java.util.ArrayList;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -89,4 +91,26 @@ public class CarManager {
 		}
 		return Response.status(Response.Status.NOT_FOUND).build();
     }
+	
+	@GET
+	@Path("/brand/{brandName}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Car[] brandSearch(@PathParam("brandName")String brand) {
+		ArrayList<Car> result = new ArrayList<>();
+		
+		//since it is sorted by brand names first, when we reach another brand 
+		//we can just return the final list
+		//If we reach end of list and result length is 0 throw 404
+		for(Car car : carList) {
+			if(car.getCarBrand().equals(brand))
+				result.add(car);
+			else if(!result.isEmpty())
+				return result.toArray(new Car[result.size()]);
+		}
+		
+		//if list is empty we throw 404, else we return list
+		if(!result.isEmpty()) return result.toArray(new Car[result.size()]);
+		
+		throw new NotFoundException();
+	}
 }
