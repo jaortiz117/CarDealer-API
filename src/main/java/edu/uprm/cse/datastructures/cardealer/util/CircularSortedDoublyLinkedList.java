@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.Node;
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.SortedList;
@@ -14,7 +15,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 	private int size;
 	private DNode<E> header;
 	private Comparator<E> comp;
-	
+
 	public CircularSortedDoublyLinkedList() {
 		this.size = 0;
 		this.header = new DNode<E>();
@@ -22,22 +23,15 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 		this.header.setPrev(this.header);
 		this.comp = new DefaultComparator();
 	}
-	
+
 	public CircularSortedDoublyLinkedList(Comparator<E> comp) {
 		this();
 		this.comp = comp;
 	}
-	
+
 	@Override
 	public Iterator<E> iterator() {
-		List<E> list = new ArrayList<E>();
-		DNode<E> cursor = this.header.getNext();
-		
-		while(cursor != header) {
-			list.add(cursor.getElement());
-			cursor = cursor.getNext();
-		}
-		return list.iterator();
+		return new CSDLLIterator();
 	}
 
 	@Override
@@ -48,9 +42,9 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 		if(this.contains(obj)){
 			return false;
 		}
-		
+
 		DNode<E> temp = new DNode<E>(obj);
-		
+
 		//add to front when empty
 		if(this.isEmpty()) {
 			this.header.setNext(temp);
@@ -60,7 +54,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 			this.size++;
 			return true;
 		}
-		
+
 		//we go through the list finding the place to place the object
 		DNode<E> cursor = header.getNext();
 		while(cursor != header) {
@@ -73,10 +67,10 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 				this.size++;
 				return true;
 			}
-			
+
 			cursor = cursor.getNext();
 		}
-		
+
 		//if it reaches the end
 		temp.setNext(this.header);
 		temp.setPrev(this.header.getPrev());
@@ -100,18 +94,18 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 	@Override
 	public boolean remove(int index) {
 		if(index > size-1 || index<0) return false;
-		
+
 		DNode<E> ntr = this.header.getNext();
 		for (int i = 0; i < index; i++) {
 			ntr = ntr.getNext();
 		}
-		
+
 		DNode<E> prev = ntr.getPrev();
 		DNode<E> next = ntr.getNext();
 		prev.setNext(next);
 		next.setPrev(prev);
 		ntr.clear();
-		
+
 		size--;
 		return true;
 	}
@@ -121,7 +115,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 		int firstIdx = this.firstIndex(obj);
 		int lastIdx = this.lastIndex(obj);
 		int currSize = this.size();
-		
+
 		for(int i = firstIdx; i<=lastIdx; i++) {
 			this.remove(firstIdx);
 		}
@@ -144,7 +138,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 		for (int i = 0; i < index; i++) {
 			ntr = ntr.getNext();
 		}
-		
+
 		return ntr.getElement();
 	}
 
@@ -157,7 +151,7 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 			cursor = cursor.getNext();
 			ntc.clear();
 		}
-		
+
 		this.header.setNext(this.header);
 		this.header.setPrev(this.header);
 		this.size = 0;
@@ -177,14 +171,14 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 	@Override
 	public int firstIndex(E e) {
 		int index = 0;
-		
+
 		DNode<E> temp = this.header.getNext();
 		while(temp != this.header) {
 			if(temp.getElement().equals(e)) return index;
 			temp = temp.getNext();
 			index++;
 		}
-		
+
 		return -1;
 	}
 
@@ -201,16 +195,16 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 
 		return -1;
 	}
-	
+
 	public void setComparator(Comparator<E> comp) {
 		this.comp = comp;
 	}
-	
+
 	private class DNode<T> implements Node<T>{
 		private DNode<T> prev;
 		private DNode<T> next;
 		private T e;
-		
+
 		public DNode(T e, DNode<T> prev, DNode<T> next){
 			this.e = e;
 			this.prev = prev;
@@ -219,42 +213,42 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 		public DNode(T e) {
 			this(e, null, null);
 		}
-		
+
 		public DNode() {
 			this(null, null, null);
 		}
-		
+
 		public void clear() {
 			this.setElement(null);
 			this.setNext(null);
 			this.setPrev(null);
 		}
-		
+
 		public DNode<T> getPrev(){
 			return prev;
 		}
-		
+
 		public DNode<T> getNext(){
 			return next;
 		}
-		
+
 		public T getElement() {
 			return e;
 		}
-		
+
 		public void setPrev(DNode<T> node){
 			this.prev = node;
 		}
-		
+
 		public void setNext(DNode<T> node){
 			this.next = node;
 		}
-		
+
 		public void setElement(T e) {
 			this.e = e;
 		}
 	}
-	
+
 	private class DefaultComparator implements Comparator<E>{
 
 		@Override
@@ -263,6 +257,29 @@ public class CircularSortedDoublyLinkedList<E> implements SortedList<E>{
 			String obj2 = o2.toString();
 			return obj1.compareTo(obj2);
 		}
-		
+
+	}
+
+	private class CSDLLIterator implements Iterator<E>{
+		//		private CircularSortedDoublyLinkedList<E> theList;
+		private DNode<E> current;
+
+		protected CSDLLIterator() {
+			//			this.theList = theList;
+			current = header.getNext();
+		}
+		@Override
+		public boolean hasNext() {
+			return current.getNext() != header.getNext();
+		}
+
+		@Override
+		public E next() {
+			if(!hasNext()) throw new NoSuchElementException("No more elements");
+			E etr = current.getElement();
+			current = current.getNext();
+			return etr;
+		}
+
 	}
 }
