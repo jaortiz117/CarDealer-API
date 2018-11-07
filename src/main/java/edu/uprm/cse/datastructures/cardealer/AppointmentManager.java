@@ -19,7 +19,7 @@ import edu.uprm.cse.datastructures.cardealer.util.interfaces.Position;
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.PositionalList;
 
 
-@Path("Appointment")
+@Path("appointment")
 public class AppointmentManager {
 	private final PositionalList<Appointment>[] appointmentList = AppointmentList.getInstance();
 	private final int DAYS = appointmentList.length;
