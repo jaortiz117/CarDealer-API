@@ -1,5 +1,7 @@
 package edu.uprm.cse.datastructures.cardealer;
 
+import java.util.ArrayList;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import edu.uprm.cse.datastructures.cardealer.model.Car;
 import edu.uprm.cse.datastructures.cardealer.model.Person;
 import edu.uprm.cse.datastructures.cardealer.model.staticLists.PersonList;
 import edu.uprm.cse.datastructures.cardealer.util.errors.NotFoundException;
@@ -87,5 +90,27 @@ public class PersonManager {
 			}
 		}
 		return Response.status(Response.Status.NOT_FOUND).build();
+	}
+	
+	@GET
+	@Path("/lastname/{lastName}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Person[] brandSearch(@PathParam("lastName")String lastName) {
+		ArrayList<Person> result = new ArrayList<>();
+
+		//since it is sorted by last names first, when we reach another last name
+		//we can just return the final list
+		//If we reach end of list and result length is 0 throw 404
+		for(Person p : personList) {
+			if(p.getLastName().equals(lastName))
+				result.add(p);
+			else if(!result.isEmpty())
+				return result.toArray(new Person[result.size()]);
+		}
+
+		//if list is empty we throw 404, else we return list
+		if(!result.isEmpty()) return result.toArray(new Person[result.size()]);
+
+		throw new NotFoundException();
 	}
 }
