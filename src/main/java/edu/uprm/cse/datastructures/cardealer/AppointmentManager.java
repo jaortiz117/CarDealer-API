@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import edu.uprm.cse.datastructures.cardealer.model.Appointment;
 import edu.uprm.cse.datastructures.cardealer.model.staticLists.AppointmentList;
+import edu.uprm.cse.datastructures.cardealer.util.errors.NotAcceptableException;
 import edu.uprm.cse.datastructures.cardealer.util.errors.NotFoundException;
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.Position;
 import edu.uprm.cse.datastructures.cardealer.util.interfaces.PositionalList;
@@ -120,7 +121,22 @@ public class AppointmentManager {
 		return Response.status(Response.Status.NOT_FOUND).build();
 	}
 
-
+	@GET
+	@Path("/day/{day}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Appointment[] searchDay(@PathParam("day") String day) {
+		ArrayList<Appointment> result = new ArrayList<>();
+		int validDay = validateDay(day);
+		
+		if(validDay < 0) throw new NotAcceptableException();
+		
+		for(Appointment app: appointmentList[validDay]) {
+			result.add(app);
+		}
+		
+		return result.toArray(new Appointment[result.size()]);
+	}
+	
 	private int validateDay(String day) {
 		switch(day) {
 		case "Monday":
