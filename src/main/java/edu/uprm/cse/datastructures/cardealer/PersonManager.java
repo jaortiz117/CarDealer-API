@@ -55,6 +55,13 @@ public class PersonManager {
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addPerson(Person person){
+
+		//checks that the id is not already used
+		for(Person p : personList) {
+			if(p.getPersonId() == person.getPersonId())
+				return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+		
 		if(personList.add(person)) {
 			return Response.status(Response.Status.CREATED).build();
 		}
@@ -91,7 +98,7 @@ public class PersonManager {
 		}
 		return Response.status(Response.Status.NOT_FOUND).build();
 	}
-	
+
 	@GET
 	@Path("/lastname/{lastName}")
 	@Produces(MediaType.APPLICATION_JSON)
