@@ -58,6 +58,14 @@ public class AppointmentManager {
 	@Path("/add/{day}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addAppointment(Appointment appointment, @PathParam("day") String day){
+		//checks that the id is not already used
+		for(int i = 0; i< DAYS; i++) {
+			for(Appointment a : appointmentList[i]) {
+				if(a.getAppointmentId() == appointment.getAppointmentId())
+					return Response.status(Response.Status.BAD_REQUEST).build();
+			}
+		}
+
 		int validDay = validateDay(day);
 
 		try {
@@ -106,7 +114,7 @@ public class AppointmentManager {
 		for(int i=0; i<DAYS; i++) {
 			for(Position<Appointment> pos : appointmentList[i].positions()) {
 				if(pos.getElement().getAppointmentId() == id) {
-					
+
 					//if remove operation fails its because position is not in the list
 					//throws 404
 					try {
@@ -127,16 +135,16 @@ public class AppointmentManager {
 	public Appointment[] searchDay(@PathParam("day") String day) {
 		ArrayList<Appointment> result = new ArrayList<>();
 		int validDay = validateDay(day);
-		
+
 		if(validDay < 0) throw new NotAcceptableException();
-		
+
 		for(Appointment app: appointmentList[validDay]) {
 			result.add(app);
 		}
-		
+
 		return result.toArray(new Appointment[result.size()]);
 	}
-	
+
 	private int validateDay(String day) {
 		switch(day) {
 		case "Monday":

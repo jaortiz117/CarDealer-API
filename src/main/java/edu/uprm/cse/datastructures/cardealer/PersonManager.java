@@ -12,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import edu.uprm.cse.datastructures.cardealer.model.Car;
 import edu.uprm.cse.datastructures.cardealer.model.Person;
 import edu.uprm.cse.datastructures.cardealer.model.staticLists.PersonList;
 import edu.uprm.cse.datastructures.cardealer.util.errors.NotFoundException;

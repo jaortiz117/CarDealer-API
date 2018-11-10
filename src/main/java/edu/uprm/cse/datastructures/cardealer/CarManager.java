@@ -55,6 +55,12 @@ public class CarManager {
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addCar(Car car){
+		//checks that the id is not already used
+		for(Car c : carList) {
+			if(c.getCarId() == car.getCarId())
+				return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+
 		if(carList.add(car)) {
 			return Response.status(Response.Status.CREATED).build();
 		}
