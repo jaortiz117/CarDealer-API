@@ -23,6 +23,11 @@ public class CarComparator implements Comparator<Car>{
 		if(model != 0) {
 			return model;
 		}
-		return car1.getCarModelOption().compareTo(car2.getCarModelOption());//same brand same model different options
+		int option = car1.getCarModelOption().compareTo(car2.getCarModelOption());//same brand same model different options
+		if(option != 0) {
+			return option;
+		}
+		
+		return Long.compare(car1.getCarYear(), car2.getCarYear());
 	}
 }
