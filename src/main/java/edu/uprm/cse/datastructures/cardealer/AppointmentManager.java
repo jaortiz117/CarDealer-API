@@ -57,7 +57,7 @@ public class AppointmentManager {
 	@POST
 	@Path("/add/{day}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addAppointment(Appointment appointment, @PathParam("day") String day){
+	public Response addAppointment(Appointment appointment, @PathParam("day") int day){
 		//checks that the id is not already used
 		for(int i = 0; i< DAYS; i++) {
 			for(Appointment a : appointmentList[i]) {
@@ -132,7 +132,7 @@ public class AppointmentManager {
 	@GET
 	@Path("/day/{day}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Appointment[] searchDay(@PathParam("day") String day) {
+	public Appointment[] searchDay(@PathParam("day") int day) {
 		ArrayList<Appointment> result = new ArrayList<>();
 		int validDay = validateDay(day);
 
@@ -160,5 +160,10 @@ public class AppointmentManager {
 		}
 
 		return -1;
+	}
+	
+	private int validateDay(int day) {
+		if(day > AppointmentList.FRIDAY || day < AppointmentList.MONDAY) return -1;
+		return day;
 	}
 }
